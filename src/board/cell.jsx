@@ -1,16 +1,27 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { input_button_pressed } from "./Board";
 import { useContext } from "react";
 function cell({ row, col }) {
   const [cell_value, set_cell_value] = useState("");
-  let set_input_pressed = useContext(input_button_pressed);
+  let buttons_pressed = useContext(input_button_pressed);
   const isLabel = useRef(false);
   let board = JSON.parse(localStorage.getItem("board"));
-  if (set_input_pressed && board[row][col] !== 0) isLabel.current = true;
+  if (buttons_pressed.input_pressed && board[row][col] !== 0)
+    isLabel.current = true;
+  if (buttons_pressed.edit_button_pressed) isLabel.current = false;
   return (
     <td style={{ border: "1px solid black", padding: "10px" }}>
       {isLabel.current && board[row][col] !== 0 ? (
-        <label style={{ color: check(row, col) ? "black" : "red" }}>
+        <label
+          style={{
+            display: "block",
+            width: "25px",
+            height: "25px",
+            border: "none",
+            margin: "3px",
+            color: check(row, col) ? "black" : "red",
+          }}
+        >
           {board[row][col]}
         </label>
       ) : (
@@ -20,15 +31,15 @@ function cell({ row, col }) {
             e.target.value = "";
           }}
           onBlur={(e) => {
-            if (e.target.value === ""){ e.target.value = 0;
-              board[row][col]=0
-              localStorage.setItem("board",JSON.stringify(board))
+            if (e.target.value === "") {
+              e.target.value = 0;
+              board[row][col] = 0;
+              localStorage.setItem("board", JSON.stringify(board));
             }
           }}
           onChange={(e) => {
             let current_value = Number(e.target.value) % 10;
             e.target.value = "";
-            // console.log(current_value)
             board = JSON.parse(localStorage.getItem("board"));
             board[row][col] = current_value;
             localStorage.setItem("board", JSON.stringify(board));
@@ -39,7 +50,7 @@ function cell({ row, col }) {
             width: "25px",
             height: "25px",
             border: "none",
-            margin: "0px 0px 0px 10px",
+            margin: "3px",
             background: check(row, col) ? "white" : "red",
             color: "black",
           }}

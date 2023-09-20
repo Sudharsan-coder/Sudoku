@@ -1,9 +1,7 @@
 import React from "react";
 
 function Solve() {
-  return (
-    <></>
-  );
+  return <></>;
 }
 export function solve_board(board) {
   for (let i = 0; i < 9; i++)
