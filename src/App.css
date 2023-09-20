@@ -1,0 +1,26 @@
+.board{
+    /* margin: 0 auto; */
+    width: fit-content;
+    /* background-color: aqua; */
+    grid-column: 2;
+    grid-row: 1;
+    margin-top: 10vh;
+    font-size: large;
+}
+table{
+    border-collapse: collapse;
+}
+.discription{
+    grid-column: 1;
+    grid-row: 1;
+    /* background-color: yellowgreen; */
+    position: relative;
+    width: fit-content;
+    top: 5em;
+    text-align: start;
+}
+.main_container{
+    display: grid;
+    /* background-color: blue; */
+    grid-template-columns: 1fr 2fr 1fr;
+}
